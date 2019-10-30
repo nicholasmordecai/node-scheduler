@@ -1,0 +1,49 @@
+{
+  "name": "node-scheduler",
+  "version": "0.0.1",
+  "description": "Node scheduler for MySQL",
+  "main": "bin/src/index.js",
+  "typings": "src/**/*.ts",
+  "keywords": [
+    "schedule",
+    "mysql",
+    "task-manager"
+  ],
+  "author": "Nicholas Mordecai",
+  "scripts": {
+    "prestart": "tsc",
+    "start": "node bin/src/index.js",
+    "dev": "tsnd --respawn src/index.ts",
+    "pretest": "tsc && tsnd test/setup.ts",
+    "test": "ts-mocha --timeout 5000 --exit test/**/*.spec.ts",
+    "coverage": "nyc ts-mocha --timeout 5000 --exit test/**/*.spec.ts",
+    "posttest": "tsnd test/setup.ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cron": "^1.7.2",
+    "dotenv": "^8.2.0",
+    "mysql2": "^1.7.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {
+    "@sentry/node": "^5.7.1",
+    "@sentry/types": "^5.7.1",
+    "@types/cron": "^1.7.1",
+    "@types/mocha": "^5.2.6",
+    "@types/mysql2": "github:types/mysql2",
+    "@types/node": "^12.7.5",
+    "@types/request-promise": "^4.1.44",
+    "@types/sinon": "^7.5.0",
+    "mocha": "^6.2.1",
+    "nodemon": "^1.19.2",
+    "nyc": "^14.1.1",
+    "should": "^13.2.3",
+    "sinon": "^7.5.0",
+    "source-map-support": "^0.5.13",
+    "ts-mocha": "^6.0.0",
+    "ts-node": "^8.4.1",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "typescript": "^3.6.3"
+  }
+}

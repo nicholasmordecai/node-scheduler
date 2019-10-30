@@ -1,0 +1,6 @@
+bin
+node_modules
+.env
+test.env
+.nyc_output
+coverage
