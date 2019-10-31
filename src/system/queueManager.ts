@@ -7,7 +7,7 @@ export class QueueManager {
     private static instance: QueueManager;    
     private jobsInProgress: number;
     private maxJobsInProgress: number;
-    private jobReferences = {};
+    private taskReferences = {};
 
     public readonly eventEmitter: EventEmitter = new EventEmitter();
 
@@ -28,6 +28,7 @@ export class QueueManager {
 
     public async runJobs() {
         if (this.jobsInProgress >= this.maxJobsInProgress) {
+            // emit an event to say that the queue maneger is maxed out
             return null;
         }
 
@@ -40,7 +41,7 @@ export class QueueManager {
             try {
                 const newJob = new Job(jobRow, this.eventEmitter);
                 try {
-                    this.jobReferences[jobRow.job](newJob);
+                    this.taskReferences[jobRow.job](newJob);
                 } catch (jobError) {
                     newJob.errored(jobError);
                 }
@@ -69,7 +70,7 @@ export class QueueManager {
         await JobController.updateJobProgress(job);
     }
 
-    public registerJob(id: number, fn: (job: IJob) => void): void {
-        this.jobReferences[id] = fn;
+    public registerTask(id: number, fn: (job: IJob) => void): void {
+        this.taskReferences[id] = fn;
     }
 }

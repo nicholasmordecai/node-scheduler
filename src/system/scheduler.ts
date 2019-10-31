@@ -14,22 +14,22 @@ export class Scheduler {
 
     public runJobs() {
         try {
-            this.events.emit('jobRunning', {time: Date.now()});
+            this.events.emit('schedulerRunning', {time: Date.now()});
             QueueManager.getInstance().runJobs();
             return true;
         } catch (error) {
-            this.events.emit('runError', {error: error, time: Date.now()});
+            this.events.emit('schedulerError', {error: error, time: Date.now()});
             throw error;
         }
     }
 
     public runJobReset() {
         try {
-            this.events.emit('resetRunning', {time: Date.now()});
+            this.events.emit('schedulerResetRunning', {time: Date.now()});
             QueueManager.getInstance().resetHungJobs();
             return true;
         } catch (error) {
-            this.events.emit('resetError', {error: error, time: Date.now()});
+            this.events.emit('schedulerResetError', {error: error, time: Date.now()});
             throw error;
         }
     }
