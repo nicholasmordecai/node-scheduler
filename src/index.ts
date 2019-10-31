@@ -5,11 +5,15 @@ process.on('unhandledRejection', (reason, p) => {
     // throw error event here
 });
 
-import { Scheduler } from './system/scheduler';
+import { Scheduler, ISchedulerOptions } from './system/scheduler';
 
 class Main {
     public static start() {
-        new Scheduler('0 * * * * *', '0 * * * * *');
+        const options: ISchedulerOptions = {
+            jobRunTime: '0 * * * * *',
+            resetJobTime: '0 * * * * *'
+        }
+        new Scheduler(options);
     }
 }
 

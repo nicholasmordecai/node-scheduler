@@ -2,23 +2,31 @@ import { CronJob } from 'cron';
 import { QueueManager } from './queueManager';
 import { EventEmitter } from 'events';
 
+export interface ISchedulerOptions {
+    jobRunTime?: string;
+    resetJobTime?: string;
+    mysql?: boolean;
+    redis?: boolean;
+
+}
+
 export class Scheduler {
     public events: EventEmitter;
 
-    constructor(jobRunTime?: string, resetJobTime?: string) {
+    constructor(options?: ISchedulerOptions) {
+        if(!options.jobRunTime) {
+            options.jobRunTime = process.env.NS_RUN_CRON;
+        }
+
+        if(!options.resetJobTime) {
+            options.resetJobTime = process.env.NS_RERUN_CRON;
+        }
+
         this.events = new EventEmitter();
         QueueManager.getInstance().listenToEvents();
 
-        if(!jobRunTime) {
-            jobRunTime = process.env.NS_RUN_CRON;
-        }
-
-        if(!resetJobTime) {
-            resetJobTime = process.env.NS_RERUN_CRON;
-        }
-
-        new CronJob(jobRunTime, () => {this.runJobs()});
-        new CronJob(resetJobTime, this.runJobReset, null, true);
+        new CronJob(options.jobRunTime, () => {this.runJobs()});
+        new CronJob(options.resetJobTime, this.runJobReset, null, true);
     }
 
     public runJobs() {

@@ -23,7 +23,7 @@ export class JobsModel {
         UPDATE jobs
             INNER JOIN (SELECT id FROM jobs 
                 WHERE status = ?
-                ORDER BY created_at ASC
+                ORDER BY priority DESC, created_at ASC
                 LIMIT 0, ?) as lim USING (id)
             SET status = ?, last_run_at = NOW(), progress = 5
             WHERE status = ?

@@ -1,7 +1,5 @@
 # Node Scheduler
 
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
-
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 Node Scheduler is a task scheduler & runner by using a persistant storage as a means of keeping track of queued, running, hung, canceled, errored and completed tasks.
@@ -10,6 +8,8 @@ Node Scheduler is a task scheduler & runner by using a persistant storage as a m
 
 ### How it works
 Currently it's implementing a FCFS type algorithm to ensure jobs get done in the order they are registered. The reading / updating of all jobs is done with locking and or transactions. This allows for scalability as you may deploy this application in a cluster, and each machine will never have a dirty read / write and try to process the same job simultaniously as another node in the cluster. 
+
+There is a priority override to the FCSC (first come first serve sorting). Priorities are read from highest number to lowest, then by runtime date stamp.
 
 # Installation
 
@@ -25,10 +25,14 @@ Just for your clarity here are a few key words and what they refer to:
 * queue manager - This manages the queue of jobs and is kept in check by the scheduler
 
 ```ts
-import { Scheduler, IJob } from 'node-scheduler';
+import { Scheduler, IJob, ISchedulerOptions } from 'node-scheduler';
 
 // This creates the Scheduler instance and gives the cron times of the run and reset jobs
-const scheduler: Scheduler = Scheduler('0 * * * * *', '0 * * * * *');
+const options: ISchedulerOptions = {
+    jobRunTime: '0 * * * * *',
+    resetJobTime: '0 * * * * *'
+}
+const scheduler: Scheduler = Scheduler(options);
 
 // this assigns a job (taskID, callback)
 scheduler.registerTask(0, doMyTask);
@@ -43,7 +47,7 @@ function doMyTask(job: IJob) {
         job.updateData('completed', true);
         job.complete();
     } else {
-        job.errored('could not send email',)
+        job.errored('could not send email');
     }
 } 
 ```
@@ -73,6 +77,7 @@ Scheduler Events
 | schedulerResetError | Triggers when there is an error when trying to reset any jobs |
 
 Job Events
+
 | Event | Description |
 | ------ | ------ |
 | jobCompleted | Triggers when a job is listed as completed |
@@ -85,6 +90,7 @@ Want to contribute? Great!
 
 ### Todos
 
+ - Job delay
  - Add a priority to override time order (fcfs)
  - Add job cancel function & event
  - Implement Redis
