@@ -48,6 +48,14 @@ function doMyTask(job: IJob) {
 } 
 ```
 
+### Envirnoment Variables
+This project can be initalised with an options object, or with envirnoment variables - or a mix of both.
+
+| Variable Name  | Description |
+| ------------- | ------------- |
+| NS_RUN_CRON  | What cron interval to run the jobs |
+| NS_RERUN_CRON Cell  | What cron interval to check for jobs to reset  |
+
 ### Dependencies
 
 This is a list of dependencies required to run the package in a production envirnoment.
@@ -56,6 +64,7 @@ This is a list of dependencies required to run the package in a production envir
 
 ### Events
 Scheduler Events
+
 | Event | Description |
 | ------ | ------ |
 | schedulerRunning | Triggers when the cron triggers the main scheduler to run |

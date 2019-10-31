@@ -1,5 +1,4 @@
 require('dotenv').config({ path: '.env' });
-require('source-map-support').install();
 
 process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at:', p, 'reason:', reason);

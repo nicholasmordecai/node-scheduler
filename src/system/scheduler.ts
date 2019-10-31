@@ -5,9 +5,18 @@ import { EventEmitter } from 'events';
 export class Scheduler {
     public events: EventEmitter;
 
-    constructor(jobRunTime: string, resetJobTime: string) {
+    constructor(jobRunTime?: string, resetJobTime?: string) {
         this.events = new EventEmitter();
         QueueManager.getInstance().listenToEvents();
+
+        if(!jobRunTime) {
+            jobRunTime = process.env.NS_RUN_CRON;
+        }
+
+        if(!resetJobTime) {
+            resetJobTime = process.env.NS_RERUN_CRON;
+        }
+
         new CronJob(jobRunTime, () => {this.runJobs()});
         new CronJob(resetJobTime, this.runJobReset, null, true);
     }
