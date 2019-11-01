@@ -96,6 +96,7 @@ Want to contribute? Great!
  - Implement Redis
  - Implement MongoDB
  - Implement Postgres
+ - Add a S3 / file upload logs or winston type logger
 
 License
 ----

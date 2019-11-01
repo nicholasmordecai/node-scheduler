@@ -5,13 +5,14 @@ import { Utils } from './utils';
 describe('Scheduler Class', () => {
 
     it('Creates an instance of the scheduler class', (done: Mocha.Done) => {
-        const scheduler = new Scheduler('0 * * * * *', '0 * * * * *');
+
+        const scheduler = new Scheduler({});
         should(scheduler).be.instanceOf(Scheduler);
         done();
     });
 
     it('The cron calls the run jobs and re-run jobs functions', async () => {
-        const scheduler = new Scheduler('* * 1 * * *', '* * 1 * * *');
+        const scheduler = new Scheduler({});
         const t1 = scheduler.runJobs();
         const t2 = scheduler.runJobReset();
         await Utils.timeout(15);

@@ -1,27 +1,25 @@
 import { CronJob } from 'cron';
 import { QueueManager } from './queueManager';
 import { EventEmitter } from 'events';
+import { Config } from '../utils/config';
 
 export interface ISchedulerOptions {
     jobRunTime?: string;
     resetJobTime?: string;
     mysql?: boolean;
     redis?: boolean;
-
+    postgres?: boolean;
+    mongodb?: boolean;
+    maxConcurrentJobs?: number;
 }
 
 export class Scheduler {
     public events: EventEmitter;
+    public 
 
     constructor(options?: ISchedulerOptions) {
-        if(!options.jobRunTime) {
-            options.jobRunTime = process.env.NS_RUN_CRON;
-        }
-
-        if(!options.resetJobTime) {
-            options.resetJobTime = process.env.NS_RERUN_CRON;
-        }
-
+        const config: ISchedulerOptions = Config.matchConfigToEnvVars(options);
+        console.log(config);
         this.events = new EventEmitter();
         QueueManager.getInstance().listenToEvents();
 
