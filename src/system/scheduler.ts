@@ -15,16 +15,15 @@ export interface ISchedulerOptions {
 
 export class Scheduler {
     public events: EventEmitter;
-    public 
 
     constructor(options?: ISchedulerOptions) {
         const config: ISchedulerOptions = Config.matchConfigToEnvVars(options);
         console.log(config);
-        this.events = new EventEmitter();
-        QueueManager.getInstance().listenToEvents();
+        // this.events = new EventEmitter();
+        // QueueManager.getInstance().listenToEvents();
 
-        new CronJob(options.jobRunTime, () => {this.runJobs()});
-        new CronJob(options.resetJobTime, this.runJobReset, null, true);
+        // new CronJob(options.jobRunTime, () => {this.runJobs()});
+        // new CronJob(options.resetJobTime, this.runJobReset, null, true);
     }
 
     public runJobs() {

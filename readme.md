@@ -97,6 +97,7 @@ Want to contribute? Great!
  - Implement MongoDB
  - Implement Postgres
  - Add a S3 / file upload logs or winston type logger
+ - Lock table in MySQL so I can remove mysql needing to use multi-statement (security improvement)
 
 License
 ----

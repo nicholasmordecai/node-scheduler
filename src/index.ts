@@ -11,7 +11,7 @@ class Main {
     public static start() {
         const options: ISchedulerOptions = {
             jobRunTime: '0 * * * * *',
-            resetJobTime: '0 * * * * *'
+            resetJobTime: '0 * * * * *',
         }
         new Scheduler(options);
     }
