@@ -16,7 +16,7 @@
   "scripts": {
     "prestart": "tsc",
     "start": "node bin/src/index.js",
-    "dev": "tsnd --respawn src/index.ts",
+    "dev": "nodemon --inspect src/index.ts",
     "pretest": "tsc && tsnd test/setup.ts",
     "test": "ts-mocha --timeout 5000 --exit test/**/*.spec.ts",
     "coverage": "nyc ts-mocha --timeout 5000 --exit test/**/*.spec.ts",
@@ -36,16 +36,15 @@
     "@types/node": "^12.7.5",
     "@types/request-promise": "^4.1.44",
     "@types/sinon": "^7.5.0",
-    "mocha": "^6.2.1",
-    "nodemon": "^1.19.2",
     "dotenv": "^8.2.0",
+    "mocha": "^6.2.1",
+    "nodemon": "^1.19.4",
     "nyc": "^14.1.1",
     "should": "^13.2.3",
     "sinon": "^7.5.0",
     "source-map-support": "^0.5.13",
     "ts-mocha": "^6.0.0",
     "ts-node": "^8.4.1",
-    "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.6.3"
   }
 }
