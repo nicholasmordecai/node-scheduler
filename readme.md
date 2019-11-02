@@ -58,7 +58,12 @@ This project can be initalised with an options object, or with envirnoment varia
 | Variable Name  | Description |
 | ------------- | ------------- |
 | NS_RUN_CRON  | What cron interval to run the jobs |
-| NS_RERUN_CRON Cell  | What cron interval to check for jobs to reset  |
+| NS_RERUN_CRON  | What cron interval to check for jobs to reset  |
+| NS_USE_MYSQL  | Should use MySQL for job persistance  |
+| NS_USE_REDIS  | Should use Redis for job persistance  |
+| NS_USE_POSTGRES  | Should use Postgres for job persistance  |
+| NS_USE_MONGO  | Should use MongoDB for job persistance  |
+| NS_MAX_JOBS  | The maximum number of jobs allowed concurrently  |
 
 ### Dependencies
 
